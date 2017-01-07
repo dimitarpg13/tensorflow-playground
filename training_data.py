@@ -23,10 +23,9 @@ def read_csv(batch_size, file_name, record_defaults):
 
 def inputs():
     passenger_id, survived, pclass, name, sex, age, sibsp, parch,
-    ticket, fare, cabin, embarked = \
-
-    read_csv(100, "train.csv", [[0.0], [0.0], [0], [""], [""], [0.0],
-                                [0.0], [""], [0.0], [""], [""]])
+    ticket, fare, cabin, embarked =  read_csv(100, "train.csv", 
+               [[0.0], [0.0], [0], [""], [""], [0.0],
+                [0.0], [""], [0.0], [""], [""]])
 
     # convert categorical data
     is_first_class = tf.to_float(tf.equal(pclass, [1]))

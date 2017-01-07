@@ -50,7 +50,7 @@ def inputs():
     # convert categorical data
     is_first_class = tf.to_float(tf.equal(pclass, [1]))
 
-    is_second_class =tf.to+float(tf.equal(pclass, [2]))
+    is_second_class =tf.to_float(tf.equal(pclass, [2]))
 
     is_third_class = tf.to_float(tf.equal(pclass, [3]))
 
