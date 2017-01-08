@@ -16,18 +16,17 @@ def read_csv(batch_size, file_name, record_defaults):
     # a tuple of tensor columns with the sepcified defaults, which also
     # sets the data type for each column
 
-    decoded = tf.decode_csv(value, record_defaults=record_defaults)
-
+    #decoded = tf.decode_csv(value, record_defaults=record_defaults)
+    col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12 = tf.decode_csv(value,record_defaults=record_defaults)
     # batch actually reads the file and loads "batch_size" rows in a single
     # tensor
 
-    return tf.train.shuffle_batch(decoded, batch_size=batch_size,
-                                  capacity=batch_size * 50,
-                                  min_after_dequeue=batch_size)
+    #return tf.train.batch(decoded, batch_size=batch_size,capacity=batch_size)
+    return tf.pack([col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12])
 
 def inputs():
 
-    passengerid, survived, pclass, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked =  read_csv(100, "train.csv", [[0.0], [0.0], [0], [""], [""], [0.0], [0.0], [0.0], [""], [0.0], [""], [""]])
+    passengerid, survived, pclass, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked =  read_csv(5, "train_small.csv", [[0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0]])
 
     # convert categorical data
     is_first_class = tf.to_float(tf.equal(pclass, [1]))
@@ -35,7 +34,7 @@ def inputs():
     is_third_class = tf.to_float(tf.equal(pclass, [3]))
 
 
-    gender = tf.to_float(tf.equal(sex, ["female"]))
+    gender = tf.to_float(tf.equal(sex, [7]))
 
     # finally we pack all the features in a single matrix
     # we then transpose to have a matrix with one example per row and
@@ -44,7 +43,7 @@ def inputs():
     features = tf.transpose(tf.pack([is_first_class, is_second_class, 
                             is_third_class, gender, age]))
 
-    survived = tf.reshape(survived, [100, 1])
+    survived = tf.reshape(survived, [5, 1])
 
     return features, survived
      

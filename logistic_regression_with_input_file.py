@@ -69,20 +69,20 @@ def inference(X):
 def loss(X, Y):
     return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(combine_inputs(X), Y))
 
-#with tf.Session() as sess:
-#    tf.global_variables_initializer().run()
+with tf.Session() as sess:
+    tf.global_variables_initializer().run()
 
-#    X, Y =inputs()
-#    total_loss = loss(X, Y)
-#    train_op = train(total_loss)
+    X, Y =inputs()
+    total_loss = loss(X, Y)
+    train_op = train(total_loss)
 
-#    training_steps = 1000
-#    initial_step = 0
+    training_steps = 1000
+    initial_step = 0
 
-#    for step in range(initial_step, training_steps):
-#        sess.run([train_op])
+    for step in range(initial_step, training_steps):
+        sess.run([train_op])
         
-#        if step % 10 == 0:
-#            print("loss: ", sess.run([total_loss]))
+        if step % 10 == 0:
+            print("loss: ", sess.run([total_loss]))
 
-#        evaluate(sess, X, Y) 
+        evaluate(sess, X, Y) 
