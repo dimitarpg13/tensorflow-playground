@@ -77,9 +77,17 @@ with tf.Session() as sess:
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(coord=coord)
 
-    example = sess.run([X])
-    print(example)
-    
+    #example = sess.run([X])
+    #print(example)
+    total_loss = loss(X,Y)
+    print("loss before optimization: ", sess.run([total_loss]))
+    train_op = train(total_loss)
+
+    sess.run([train_op])
+
+    evaluate(sess,X, Y)    
+    total_loss = loss(X,Y)
+    print("loss after optimization: ", sess.run([total_loss]))
     coord.request_stop()
     coord.join(threads)
 #    total_loss = loss(X, Y)
